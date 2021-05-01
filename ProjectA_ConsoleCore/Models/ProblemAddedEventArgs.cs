@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-
-namespace ProjectA_ConsoleCore.Models
+﻿namespace ProjectA_ConsoleCore.Models
 {
     public class ProblemAddedEventArgs
     {

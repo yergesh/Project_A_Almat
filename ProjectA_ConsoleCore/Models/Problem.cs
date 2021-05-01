@@ -10,8 +10,8 @@ namespace ProjectA_ConsoleCore.Models
         public string Text { get; set; }
         public List<TestCase> TestCases { get; set; }
 
-        public DateTime Download { get; set; }
-        public DateTime Deadline { get; set; }
+        public DateTime Download { get; set; } // Есеп системаға жүктелген уақыты қосылды
+        public DateTime Deadline { get; set; } // Дедлайн уақыты қосылды
 
         public int Point { get; set; } // Есептің ұпайы
 

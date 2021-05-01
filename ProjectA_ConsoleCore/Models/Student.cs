@@ -17,7 +17,6 @@ namespace ProjectA_ConsoleCore.Models
         public double Gpa { get; set; }
         
         public List<ProblemAddedEventArgs> Notifications { get; set; } = new List<ProblemAddedEventArgs>();
-        
     }
 }
 

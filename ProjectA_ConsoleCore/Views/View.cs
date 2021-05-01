@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using ProjectA_ConsoleCore.Helper;
 using ProjectA_ConsoleCore.Models;
@@ -71,12 +70,9 @@ namespace ProjectA_ConsoleCore.Views
                       "[0] - Артқа");
         }
         
-        //Мұғалім хабарламасы
         public void SendMessageToTheStudentMenu()
         {
-            WriteLine("[1] - Студенттерге хабарлама жіберу\n" +
-                      "[2] - Студентке ескертпе\n" +
-                      "[0] - Артқа");
+            WriteLine("[0] - Артқа");
         }
         
         #endregion
@@ -192,7 +188,6 @@ namespace ProjectA_ConsoleCore.Views
 
         public void Wait() => ReadKey();
         
-
         #endregion
         
         #region Print
@@ -202,7 +197,7 @@ namespace ProjectA_ConsoleCore.Views
             if (attempts == null || attempts.Count == 0)
             {
                 Print("Сіз ештеңе жібермегенсіз");
-                ReadKey();
+                Wait();
             }
             else
             {
@@ -214,7 +209,7 @@ namespace ProjectA_ConsoleCore.Views
                     WriteLine($"|{attempt.Id,5}|{attempt.Problem.Title, 20}|{attempt.ShippingTime, 20}|{attempt.Verdict, 20}|");
                 }
                 WriteLine(new string('-', 70));
-                ReadKey();
+                Wait();
             }
         }
         
@@ -257,6 +252,7 @@ namespace ProjectA_ConsoleCore.Views
             WriteLine(new string('-',120));
         }
 
+        //Есеп баған атаулары
         public void PrintHeaderProblem()
         {
             WriteLine($"{"No.",4}|ID|{"Тақырыбы",20}|{"Баллы",4}| {"Жүктелді",20} | {"Дедлайн",20}|");
@@ -282,21 +278,6 @@ namespace ProjectA_ConsoleCore.Views
             return list[index-1];
         }
         
-        public void ShowNotifications(User user)
-        {
-            Student student = user as Student;
-            WriteLine($"Сізде {student.Notifications.Count} жаңа хабарлама бар: ");
-            for (int i = 0; i < student.Notifications.Count; i++)
-            {
-                WriteLine($"\t{i+1}) Мұғалім: {student.Notifications[i].FromTeacherName} {student.Notifications[i].FromTeacherLastName}");
-                WriteLine($"\t\t Есеп аты: {student.Notifications[i].Title}");
-                WriteLine($"\t\t Балы: {student.Notifications[i].Point}");
-                WriteLine($"\t\t Жүктелген уақыты: {student.Notifications[i].Download}");
-                WriteLine($"\t\t Дедлайн уақыты: {student.Notifications[i].Deadline}");
-            }
-            ReadKey();
-            student.Notifications.Clear();
-        }
         #endregion
 
         // Кесте
@@ -337,6 +318,22 @@ namespace ProjectA_ConsoleCore.Views
                 }
                 WriteLine($"{mark, 6}|{student.Gpa, 6:F}|");
             }
+        }
+        //Студент хабарламасының консольдық бейнесі
+        public void ShowNotifications(User user)
+        {
+            Student student = user as Student;
+            WriteLine($"Сізде {student.Notifications.Count} жаңа хабарлама бар: ");
+            for (int i = 0; i < student.Notifications.Count; i++)
+            {
+                WriteLine($"\t{i+1}) Мұғалім: {student.Notifications[i].FromTeacherName} {student.Notifications[i].FromTeacherLastName}");
+                WriteLine($"\t\t Есеп аты: {student.Notifications[i].Title}");
+                WriteLine($"\t\t Балы: {student.Notifications[i].Point}");
+                WriteLine($"\t\t Жүктелген уақыты: {student.Notifications[i].Download}");
+                WriteLine($"\t\t Дедлайн уақыты: {student.Notifications[i].Deadline}");
+            }
+            Wait();
+            student.Notifications.Clear(); // Хабарламалар тізімі көрсетіліп болғаннан кейін тазаланады 
         }
     }
 }
